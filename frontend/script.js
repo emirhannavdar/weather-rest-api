@@ -2,7 +2,7 @@ const API_URL = "http://127.0.0.1:8000";
 
 
 // =====================================================
-// SAYFA AÇILDIĞINDA API KONTROLÜ
+// SAYFA BAŞLANGICI
 // =====================================================
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -17,28 +17,42 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
 // =====================================================
-// API DURUMU
+// API KONTROL
 // =====================================================
 
 async function checkAPI() {
 
-    const status = document.getElementById("apiStatus");
+    const status =
+        document.getElementById("apiStatus");
 
     try {
 
-        const response = await fetch(`${API_URL}/`);
+        const response =
+            await fetch(`${API_URL}/`);
 
         if (!response.ok) {
-            throw new Error("API cevap vermedi.");
+
+            throw new Error(
+                "API cevap vermedi."
+            );
+
         }
 
-        status.innerHTML = "● API aktif";
+        status.innerHTML =
+            "● API aktif";
 
-    } catch (error) {
+        status.style.color =
+            "#86efac";
 
-        status.innerHTML = "● API bağlantısı yok";
+    }
 
-        status.style.color = "#fca5a5";
+    catch (error) {
+
+        status.innerHTML =
+            "● API bağlantısı yok";
+
+        status.style.color =
+            "#fca5a5";
 
     }
 
@@ -51,31 +65,52 @@ async function checkAPI() {
 
 function setupTabs() {
 
-    const tabs = document.querySelectorAll(".tab");
+    const tabs =
+        document.querySelectorAll(".tab");
 
-    const contents = document.querySelectorAll(".tab-content");
+    const contents =
+        document.querySelectorAll(".tab-content");
+
 
     tabs.forEach(tab => {
 
-        tab.addEventListener("click", () => {
+        tab.addEventListener(
+            "click",
+            () => {
 
-            const target = tab.dataset.tab;
+                const target =
+                    tab.dataset.tab;
 
-            tabs.forEach(t => {
-                t.classList.remove("active");
-            });
 
-            contents.forEach(content => {
-                content.classList.remove("active");
-            });
+                tabs.forEach(t => {
 
-            tab.classList.add("active");
+                    t.classList.remove(
+                        "active"
+                    );
 
-            document
-                .getElementById(target)
-                .classList.add("active");
+                });
 
-        });
+
+                contents.forEach(content => {
+
+                    content.classList.remove(
+                        "active"
+                    );
+
+                });
+
+
+                tab.classList.add(
+                    "active"
+                );
+
+
+                document
+                    .getElementById(target)
+                    .classList.add("active");
+
+            }
+        );
 
     });
 
@@ -88,53 +123,93 @@ function setupTabs() {
 
 function setupEnterKeys() {
 
-    document.querySelectorAll("input").forEach(input => {
+    document
+        .querySelectorAll("input")
+        .forEach(input => {
 
-        input.addEventListener("keydown", event => {
+            input.addEventListener(
+                "keydown",
+                event => {
 
-            if (event.key !== "Enter") {
-                return;
-            }
+                    if (
+                        event.key !== "Enter"
+                    ) {
+                        return;
+                    }
 
-            const section =
-                input.closest(".tab-content");
 
-            const id = section.id;
+                    const section =
+                        input.closest(
+                            ".tab-content"
+                        );
 
-            if (id === "general") {
-                getGeneralWeather();
-            }
 
-            else if (id === "day") {
-                getDayWeather();
-            }
+                    if (!section) {
+                        return;
+                    }
 
-            else if (id === "range") {
-                getRangeWeather();
-            }
+
+                    switch(section.id) {
+
+                        case "general":
+
+                            getGeneralWeather();
+
+                            break;
+
+
+                        case "day":
+
+                            getDayWeather();
+
+                            break;
+
+
+                        case "range":
+
+                            getRangeWeather();
+
+                            break;
+
+
+                        case "last30":
+
+                            getLast30Days();
+
+                            break;
+
+                    }
+
+                }
+            );
 
         });
-
-    });
 
 }
 
 
 // =====================================================
-// 1 — GENEL HAVA
+// 1. GENEL HAVA
 // GET /weather
 // =====================================================
 
 async function getGeneralWeather() {
 
     const lat =
-        document.getElementById("generalLat").value;
+        document.getElementById(
+            "generalLat"
+        ).value;
 
     const lon =
-        document.getElementById("generalLon").value;
+        document.getElementById(
+            "generalLon"
+        ).value;
+
 
     const result =
-        document.getElementById("generalResult");
+        document.getElementById(
+            "generalResult"
+        );
 
 
     if (!lat || !lon) {
@@ -149,9 +224,9 @@ async function getGeneralWeather() {
 
 
     result.innerHTML =
-        `<div class="loading">
-            ⏳ Hava durumu getiriliyor...
-        </div>`;
+        loading(
+            "Hava durumu getiriliyor..."
+        );
 
 
     const url =
@@ -162,15 +237,19 @@ async function getGeneralWeather() {
 
     try {
 
-        const response = await fetch(url);
+        const response =
+            await fetch(url);
 
-        const json = await response.json();
+
+        const json =
+            await response.json();
 
 
         if (!response.ok) {
 
             throw new Error(
-                json.detail || "API hatası"
+                json.detail ||
+                "API hatası"
             );
 
         }
@@ -182,8 +261,9 @@ async function getGeneralWeather() {
             "Genel Hava Durumu"
         );
 
+    }
 
-    } catch (error) {
+    catch (error) {
 
         showError(
             result,
@@ -196,27 +276,39 @@ async function getGeneralWeather() {
 
 
 // =====================================================
-// 2 — TEK GÜN
+// 2. TEK GÜN
 // GET /weather/day
 // =====================================================
 
 async function getDayWeather() {
 
     const lat =
-        document.getElementById("dayLat").value;
+        document.getElementById(
+            "dayLat"
+        ).value;
 
     const lon =
-        document.getElementById("dayLon").value;
+        document.getElementById(
+            "dayLon"
+        ).value;
 
     const date =
-        document.getElementById("dayDate").value;
+        document.getElementById(
+            "dayDate"
+        ).value;
 
 
     const result =
-        document.getElementById("dayResult");
+        document.getElementById(
+            "dayResult"
+        );
 
 
-    if (!lat || !lon || !date) {
+    if (
+        !lat ||
+        !lon ||
+        !date
+    ) {
 
         showError(
             result,
@@ -228,9 +320,9 @@ async function getDayWeather() {
 
 
     result.innerHTML =
-        `<div class="loading">
-            ⏳ Günlük hava durumu getiriliyor...
-        </div>`;
+        loading(
+            "Günlük hava durumu getiriliyor..."
+        );
 
 
     const url =
@@ -242,15 +334,19 @@ async function getDayWeather() {
 
     try {
 
-        const response = await fetch(url);
+        const response =
+            await fetch(url);
 
-        const json = await response.json();
+
+        const json =
+            await response.json();
 
 
         if (!response.ok) {
 
             throw new Error(
-                json.detail || "API hatası"
+                json.detail ||
+                "API hatası"
             );
 
         }
@@ -262,8 +358,9 @@ async function getDayWeather() {
             `${date} Hava Durumu`
         );
 
+    }
 
-    } catch (error) {
+    catch (error) {
 
         showError(
             result,
@@ -276,30 +373,45 @@ async function getDayWeather() {
 
 
 // =====================================================
-// 3 — TARİH ARALIĞI
+// 3. TARİH ARALIĞI
 // GET /weather/day/aralik
 // =====================================================
 
 async function getRangeWeather() {
 
     const lat =
-        document.getElementById("rangeLat").value;
+        document.getElementById(
+            "rangeLat"
+        ).value;
 
     const lon =
-        document.getElementById("rangeLon").value;
+        document.getElementById(
+            "rangeLon"
+        ).value;
 
     const start =
-        document.getElementById("rangeStart").value;
+        document.getElementById(
+            "rangeStart"
+        ).value;
 
     const end =
-        document.getElementById("rangeEnd").value;
+        document.getElementById(
+            "rangeEnd"
+        ).value;
 
 
     const result =
-        document.getElementById("rangeResult");
+        document.getElementById(
+            "rangeResult"
+        );
 
 
-    if (!lat || !lon || !start || !end) {
+    if (
+        !lat ||
+        !lon ||
+        !start ||
+        !end
+    ) {
 
         showError(
             result,
@@ -322,9 +434,9 @@ async function getRangeWeather() {
 
 
     result.innerHTML =
-        `<div class="loading">
-            ⏳ Tarih aralığı getiriliyor...
-        </div>`;
+        loading(
+            "Tarih aralığı getiriliyor..."
+        );
 
 
     const url =
@@ -337,15 +449,19 @@ async function getRangeWeather() {
 
     try {
 
-        const response = await fetch(url);
+        const response =
+            await fetch(url);
 
-        const json = await response.json();
+
+        const json =
+            await response.json();
 
 
         if (!response.ok) {
 
             throw new Error(
-                json.detail || "API hatası"
+                json.detail ||
+                "API hatası"
             );
 
         }
@@ -358,8 +474,9 @@ async function getRangeWeather() {
             end
         );
 
+    }
 
-    } catch (error) {
+    catch (error) {
 
         showError(
             result,
@@ -372,7 +489,93 @@ async function getRangeWeather() {
 
 
 // =====================================================
-// NORMAL HAVA SONUCUNU GÖSTER
+// 4. SON 30 GÜN
+// GET /weather/day/Son30Gun
+// =====================================================
+
+async function getLast30Days() {
+
+    const lat =
+        document.getElementById(
+            "last30Lat"
+        ).value;
+
+    const lon =
+        document.getElementById(
+            "last30Lon"
+        ).value;
+
+
+    const result =
+        document.getElementById(
+            "last30Result"
+        );
+
+
+    if (!lat || !lon) {
+
+        showError(
+            result,
+            "Enlem ve boylam bilgilerini giriniz."
+        );
+
+        return;
+    }
+
+
+    result.innerHTML =
+        loading(
+            "Son 30 günlük veriler getiriliyor..."
+        );
+
+
+    const url =
+        `${API_URL}/weather/day/Son30Gun` +
+        `?enlem=${encodeURIComponent(lat)}` +
+        `&boylam=${encodeURIComponent(lon)}`;
+
+
+    try {
+
+        const response =
+            await fetch(url);
+
+
+        const json =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                json.detail ||
+                "API hatası"
+            );
+
+        }
+
+
+        renderLast30Days(
+            result,
+            json
+        );
+
+    }
+
+    catch (error) {
+
+        showError(
+            result,
+            `Son 30 gün alınamadı: ${error.message}`
+        );
+
+    }
+
+}
+
+
+// =====================================================
+// NORMAL HAVA SONUCU
 // =====================================================
 
 function renderWeatherResult(
@@ -381,12 +584,28 @@ function renderWeatherResult(
     title
 ) {
 
-    const data = json.data;
+    const data =
+        json.data;
+
+
+    if (!data) {
+
+        showError(
+            container,
+            "API sonucunda data alanı bulunamadı."
+        );
+
+        return;
+    }
+
+
+    const days =
+        data.days || [];
+
 
     const day =
-        data.days &&
-        data.days.length > 0
-            ? data.days[0]
+        days.length > 0
+            ? days[0]
             : null;
 
 
@@ -406,7 +625,10 @@ function renderWeatherResult(
         <div class="result-header">
 
             <div>
-                <h2>${title}</h2>
+
+                <h2>
+                    ${escapeHtml(title)}
+                </h2>
 
                 <div class="location">
                     📍 ${escapeHtml(
@@ -415,12 +637,17 @@ function renderWeatherResult(
                         "Bilinmeyen konum"
                     )}
                 </div>
+
+            </div>
+
+            <div class="location">
+
+                📅 ${formatDate(day.datetime)}
+
             </div>
 
         </div>
 
-
-        <!-- ANA HAVA KARTI -->
 
         <div class="weather-main">
 
@@ -444,6 +671,7 @@ function renderWeatherResult(
 
             </div>
 
+
             <div class="weather-icon">
                 ${getWeatherIcon(day.icon)}
             </div>
@@ -451,7 +679,9 @@ function renderWeatherResult(
         </div>
 
 
-        <!-- SICAKLIK -->
+        <h3 class="result-header">
+            🌡️ Sıcaklık
+        </h3>
 
         <div class="card-grid">
 
@@ -478,10 +708,8 @@ function renderWeatherResult(
         </div>
 
 
-        <!-- ATMOSFER -->
-
         <h3 class="result-header">
-            Atmosfer Bilgileri
+            🌬️ Atmosfer
         </h3>
 
         <div class="card-grid">
@@ -493,7 +721,7 @@ function renderWeatherResult(
 
             ${infoCard(
                 "Basınç",
-                `${value(day.pressure)}`
+                value(day.pressure)
             )}
 
             ${infoCard(
@@ -503,7 +731,7 @@ function renderWeatherResult(
 
             ${infoCard(
                 "Görüş",
-                `${value(day.visibility)}`
+                value(day.visibility)
             )}
 
             ${infoCard(
@@ -524,17 +752,15 @@ function renderWeatherResult(
         </div>
 
 
-        <!-- YAĞIŞ -->
-
         <h3 class="result-header">
-            Yağış ve Kar
+            🌧️ Yağış ve Kar
         </h3>
 
         <div class="card-grid">
 
             ${infoCard(
                 "Yağış",
-                `${value(day.precip)}`
+                value(day.precip)
             )}
 
             ${infoCard(
@@ -554,21 +780,19 @@ function renderWeatherResult(
 
             ${infoCard(
                 "Kar",
-                `${value(day.snow)}`
+                value(day.snow)
             )}
 
             ${infoCard(
                 "Kar Derinliği",
-                `${value(day.snowdepth)}`
+                value(day.snowdepth)
             )}
 
         </div>
 
 
-        <!-- GÜNEŞ -->
-
         <h3 class="result-header">
-            ☀️ Güneş Bilgileri
+            ☀️ Güneş
         </h3>
 
         <div class="card-grid">
@@ -605,8 +829,6 @@ function renderWeatherResult(
 
         </div>
 
-
-        <!-- API BİLGİLERİ -->
 
         <h3 class="result-header">
             📡 API Bilgileri
@@ -657,16 +879,15 @@ function renderWeatherResult(
         </div>
 
 
-        <!-- TÜM JSON -->
-
         ${rawJson(json)}
 
     `;
+
 }
 
 
 // =====================================================
-// TARİH ARALIĞI SONUCU
+// TARİH ARALIĞI
 // =====================================================
 
 function renderRangeResult(
@@ -676,9 +897,12 @@ function renderRangeResult(
     end
 ) {
 
-    const data = json.data;
+    const data =
+        json.data;
 
-    const days = data.days || [];
+
+    const days =
+        data.days || [];
 
 
     let html = `
@@ -687,7 +911,9 @@ function renderRangeResult(
 
             <div>
 
-                <h2>📆 Tarih Aralığı Sonuçları</h2>
+                <h2>
+                    📆 Tarih Aralığı
+                </h2>
 
                 <div class="location">
                     📍 ${escapeHtml(
@@ -699,8 +925,11 @@ function renderRangeResult(
 
             </div>
 
+
             <div class="location">
+
                 ${start} → ${end}
+
             </div>
 
         </div>
@@ -717,16 +946,23 @@ function renderRangeResult(
             <div class="day-card">
 
                 <h3>
-                    📅 ${formatDate(day.datetime)}
+                    📅 ${formatDate(
+                        day.datetime
+                    )}
                 </h3>
 
+
                 <div class="weather-icon">
-                    ${getWeatherIcon(day.icon)}
+                    ${getWeatherIcon(
+                        day.icon
+                    )}
                 </div>
+
 
                 <div class="day-temp">
                     ${value(day.temp)} °C
                 </div>
+
 
                 <div class="day-condition">
                     ${escapeHtml(
@@ -795,6 +1031,330 @@ function renderRangeResult(
             📡 API Bilgileri
         </h3>
 
+
+        <div class="card-grid">
+
+            ${infoCard(
+                "Toplam Gün",
+                days.length
+            )}
+
+            ${infoCard(
+                "Enlem",
+                value(data.latitude)
+            )}
+
+            ${infoCard(
+                "Boylam",
+                value(data.longitude)
+            )}
+
+            ${infoCard(
+                "Timezone",
+                formatValue(data.timezone)
+            )}
+
+            ${infoCard(
+                "UTC Offset",
+                value(data.tzoffset)
+            )}
+
+            ${infoCard(
+                "Query Cost",
+                value(data.queryCost)
+            )}
+
+        </div>
+
+
+        ${rawJson(json)}
+
+    `;
+
+
+    container.innerHTML =
+        html;
+
+}
+
+
+// =====================================================
+// SON 30 GÜN
+// =====================================================
+
+function renderLast30Days(
+    container,
+    json
+) {
+
+    const data =
+        json.data;
+
+
+    if (!data) {
+
+        showError(
+            container,
+            "API sonucunda data alanı bulunamadı."
+        );
+
+        return;
+    }
+
+
+    const days =
+        data.days || [];
+
+
+    if (days.length === 0) {
+
+        showError(
+            container,
+            "Son 30 gün için veri bulunamadı."
+        );
+
+        return;
+    }
+
+
+    // ---------------------------------------------
+    // İSTATİSTİKLER
+    // ---------------------------------------------
+
+    const temperatures =
+        days
+            .map(d => Number(d.temp))
+            .filter(n => !isNaN(n));
+
+
+    const maxTemperatures =
+        days
+            .map(d => Number(d.tempmax))
+            .filter(n => !isNaN(n));
+
+
+    const minTemperatures =
+        days
+            .map(d => Number(d.tempmin))
+            .filter(n => !isNaN(n));
+
+
+    const avgTemp =
+        temperatures.length
+            ? (
+                temperatures.reduce(
+                    (a, b) => a + b,
+                    0
+                )
+                /
+                temperatures.length
+            ).toFixed(1)
+            : "-";
+
+
+    const highest =
+        maxTemperatures.length
+            ? Math.max(
+                ...maxTemperatures
+            ).toFixed(1)
+            : "-";
+
+
+    const lowest =
+        minTemperatures.length
+            ? Math.min(
+                ...minTemperatures
+            ).toFixed(1)
+            : "-";
+
+
+    let html = `
+
+        <div class="result-header">
+
+            <div>
+
+                <h2>
+                    📊 Son 30 Gün
+                </h2>
+
+                <div class="location">
+                    📍 ${escapeHtml(
+                        data.resolvedAddress ||
+                        data.address ||
+                        "-"
+                    )}
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ÖZET -->
+
+        <div class="history-summary">
+
+            <div class="summary-card">
+
+                <div class="summary-title">
+                    Veri Sayısı
+                </div>
+
+                <div class="summary-value">
+                    ${days.length}
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-title">
+                    Ortalama Sıcaklık
+                </div>
+
+                <div class="summary-value">
+                    ${avgTemp} °C
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-title">
+                    En Yüksek
+                </div>
+
+                <div class="summary-value">
+                    ${highest} °C
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-title">
+                    En Düşük
+                </div>
+
+                <div class="summary-value">
+                    ${lowest} °C
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- GÜNLER -->
+
+        <h3 class="result-header">
+            📅 Günlük Veriler
+        </h3>
+
+
+        <div class="days-grid">
+    `;
+
+
+    days.forEach(day => {
+
+        html += `
+
+            <div class="day-card">
+
+                <h3>
+                    📅 ${formatDate(
+                        day.datetime
+                    )}
+                </h3>
+
+
+                <div class="weather-icon">
+                    ${getWeatherIcon(
+                        day.icon
+                    )}
+                </div>
+
+
+                <div class="day-temp">
+                    ${value(day.temp)} °C
+                </div>
+
+
+                <div class="day-condition">
+                    ${escapeHtml(
+                        day.conditions || "-"
+                    )}
+                </div>
+
+
+                <div class="card-grid">
+
+                    ${infoCard(
+                        "Minimum",
+                        `${value(day.tempmin)} °C`
+                    )}
+
+                    ${infoCard(
+                        "Maksimum",
+                        `${value(day.tempmax)} °C`
+                    )}
+
+                    ${infoCard(
+                        "Hissedilen",
+                        `${value(day.feelslike)} °C`
+                    )}
+
+                    ${infoCard(
+                        "Nem",
+                        `${value(day.humidity)} %`
+                    )}
+
+                    ${infoCard(
+                        "Yağış",
+                        value(day.precip)
+                    )}
+
+                    ${infoCard(
+                        "Yağış Olasılığı",
+                        `${value(day.precipprob)} %`
+                    )}
+
+                    ${infoCard(
+                        "Rüzgar",
+                        `${value(day.windspeed)} km/h`
+                    )}
+
+                    ${infoCard(
+                        "UV",
+                        value(day.uvindex)
+                    )}
+
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+
+    html += `
+
+        </div>
+
+
+        <!-- API BİLGİLERİ -->
+
+        <h3 class="result-header">
+            📡 API Bilgileri
+        </h3>
+
+
         <div class="card-grid">
 
             ${infoCard(
@@ -830,7 +1390,8 @@ function renderRangeResult(
     `;
 
 
-    container.innerHTML = html;
+    container.innerHTML =
+        html;
 
 }
 
@@ -839,14 +1400,17 @@ function renderRangeResult(
 // BİLGİ KARTI
 // =====================================================
 
-function infoCard(title, valueText) {
+function infoCard(
+    title,
+    valueText
+) {
 
     return `
 
         <div class="info-card">
 
             <div class="info-title">
-                ${title}
+                ${escapeHtml(title)}
             </div>
 
             <div class="info-value">
@@ -861,7 +1425,7 @@ function infoCard(title, valueText) {
 
 
 // =====================================================
-// HAM JSON
+// RAW JSON
 // =====================================================
 
 function rawJson(json) {
@@ -877,7 +1441,11 @@ function rawJson(json) {
                 </summary>
 
                 <pre>${escapeHtml(
-                    JSON.stringify(json, null, 2)
+                    JSON.stringify(
+                        json,
+                        null,
+                        2
+                    )
                 )}</pre>
 
             </details>
@@ -897,37 +1465,53 @@ function getWeatherIcon(icon) {
 
     const icons = {
 
-        "clear-day": "☀️",
+        "clear-day":
+            "☀️",
 
-        "clear-night": "🌙",
+        "clear-night":
+            "🌙",
 
-        "partly-cloudy-day": "⛅",
+        "partly-cloudy-day":
+            "⛅",
 
-        "partly-cloudy-night": "☁️",
+        "partly-cloudy-night":
+            "☁️",
 
-        "cloudy": "☁️",
+        "cloudy":
+            "☁️",
 
-        "rain": "🌧️",
+        "rain":
+            "🌧️",
 
-        "showers-day": "🌦️",
+        "showers-day":
+            "🌦️",
 
-        "showers-night": "🌧️",
+        "showers-night":
+            "🌧️",
 
-        "thunder-rain": "⛈️",
+        "thunder-rain":
+            "⛈️",
 
-        "thunder-showers-day": "⛈️",
+        "thunder-showers-day":
+            "⛈️",
 
-        "thunder-showers-night": "⛈️",
+        "thunder-showers-night":
+            "⛈️",
 
-        "snow": "❄️",
+        "snow":
+            "❄️",
 
-        "snow-showers-day": "🌨️",
+        "snow-showers-day":
+            "🌨️",
 
-        "snow-showers-night": "🌨️",
+        "snow-showers-night":
+            "🌨️",
 
-        "fog": "🌫️",
+        "fog":
+            "🌫️",
 
-        "wind": "💨"
+        "wind":
+            "💨"
 
     };
 
@@ -941,12 +1525,12 @@ function getWeatherIcon(icon) {
 // DEĞER FORMATLAMA
 // =====================================================
 
-function value(value) {
+function value(val) {
 
     if (
-        value === null ||
-        value === undefined ||
-        value === ""
+        val === null ||
+        val === undefined ||
+        val === ""
     ) {
 
         return "-";
@@ -955,25 +1539,29 @@ function value(value) {
 
 
     if (
-        typeof value === "number" &&
-        !Number.isInteger(value)
+        typeof val === "number" &&
+        !Number.isInteger(val)
     ) {
 
-        return value.toFixed(1);
+        return val.toFixed(1);
 
     }
 
 
-    return value;
+    return escapeHtml(val);
 
 }
 
 
-function formatValue(value) {
+// =====================================================
+// GENEL FORMAT
+// =====================================================
+
+function formatValue(val) {
 
     if (
-        value === null ||
-        value === undefined
+        val === null ||
+        val === undefined
     ) {
 
         return "-";
@@ -981,40 +1569,63 @@ function formatValue(value) {
     }
 
 
-    if (Array.isArray(value)) {
+    if (Array.isArray(val)) {
 
-        return value.length
-            ? value.join(", ")
+        return val.length
+            ? escapeHtml(
+                val.join(", ")
+            )
             : "-";
 
     }
 
 
-    if (typeof value === "object") {
+    if (
+        typeof val === "object"
+    ) {
 
-        return JSON.stringify(value);
+        return escapeHtml(
+            JSON.stringify(val)
+        );
 
     }
 
 
-    return value;
+    return escapeHtml(val);
 
 }
 
 
 // =====================================================
-// TARİH
+// TARİH FORMAT
 // =====================================================
 
 function formatDate(dateString) {
 
     if (!dateString) {
+
         return "-";
+
     }
 
 
     const date =
-        new Date(`${dateString}T00:00:00`);
+        new Date(
+            `${dateString}T00:00:00`
+        );
+
+
+    if (
+        Number.isNaN(
+            date.getTime()
+        )
+    ) {
+
+        return escapeHtml(
+            dateString
+        );
+
+    }
 
 
     return date.toLocaleDateString(
@@ -1030,26 +1641,30 @@ function formatDate(dateString) {
 
 
 // =====================================================
-// HTML GÜVENLİĞİ
+// LOADING
 // =====================================================
 
-function escapeHtml(value) {
+function loading(message) {
 
-    return String(value)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
+    return `
+
+        <div class="loading">
+            ⏳ ${escapeHtml(message)}
+        </div>
+
+    `;
 
 }
 
 
 // =====================================================
-// HATA
+// ERROR
 // =====================================================
 
-function showError(container, message) {
+function showError(
+    container,
+    message
+) {
 
     container.innerHTML = `
 
@@ -1058,5 +1673,41 @@ function showError(container, message) {
         </div>
 
     `;
+
+}
+
+
+// =====================================================
+// HTML GÜVENLİĞİ
+// =====================================================
+
+function escapeHtml(value) {
+
+    return String(value)
+
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
 
 }

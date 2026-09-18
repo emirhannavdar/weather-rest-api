@@ -4,8 +4,13 @@
     padding: 0;
 }
 
+
 body {
-    font-family: Arial, Helvetica, sans-serif;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
 
     background:
         radial-gradient(
@@ -24,55 +29,85 @@ body {
     min-height: 100vh;
 }
 
+
 .container {
+
     width: 95%;
+
     max-width: 1250px;
 
     margin: auto;
 
-    padding: 30px 0 60px;
+    padding:
+        30px
+        0
+        60px;
 }
 
 
+/* ========================================= */
 /* HEADER */
+/* ========================================= */
 
 header {
+
     display: flex;
 
     justify-content: space-between;
+
     align-items: center;
 
     margin-bottom: 30px;
+
+    gap: 20px;
 }
 
+
 .logo {
+
     font-size: 32px;
+
     font-weight: 700;
 }
 
+
 header p {
+
     color: #9ca3af;
+
     margin-top: 6px;
 }
 
+
 .status {
-    background: rgba(255,255,255,.07);
 
-    border: 1px solid rgba(255,255,255,.1);
+    background:
+        rgba(255,255,255,.07);
 
-    padding: 10px 16px;
+    border:
+        1px solid
+        rgba(255,255,255,.1);
+
+    padding:
+        10px
+        16px;
 
     border-radius: 20px;
 
     color: #86efac;
 
     font-size: 14px;
+
+    white-space: nowrap;
 }
 
 
+/* ========================================= */
 /* TABS */
+/* ========================================= */
 
 .tabs {
+
     display: flex;
 
     gap: 10px;
@@ -82,14 +117,19 @@ header p {
     flex-wrap: wrap;
 }
 
+
 .tab {
+
     border: none;
 
-    background: rgba(255,255,255,.07);
+    background:
+        rgba(255,255,255,.07);
 
     color: #cbd5e1;
 
-    padding: 14px 20px;
+    padding:
+        14px
+        20px;
 
     border-radius: 12px;
 
@@ -97,38 +137,57 @@ header p {
 
     font-size: 15px;
 
-    transition: .2s;
+    transition:
+        .2s;
 }
+
 
 .tab:hover {
-    background: rgba(255,255,255,.12);
+
+    background:
+        rgba(255,255,255,.12);
 }
 
+
 .tab.active {
+
     background: #ffffff;
+
     color: #111827;
 }
 
 
+/* ========================================= */
 /* TAB CONTENT */
+/* ========================================= */
 
 .tab-content {
+
     display: none;
 }
 
+
 .tab-content.active {
+
     display: block;
 }
 
 
+/* ========================================= */
 /* SEARCH CARD */
+/* ========================================= */
 
 .search-card {
-    background: rgba(255,255,255,.06);
 
-    border: 1px solid rgba(255,255,255,.1);
+    background:
+        rgba(255,255,255,.06);
 
-    backdrop-filter: blur(15px);
+    border:
+        1px solid
+        rgba(255,255,255,.1);
+
+    backdrop-filter:
+        blur(15px);
 
     border-radius: 20px;
 
@@ -137,33 +196,107 @@ header p {
     margin-bottom: 25px;
 }
 
+
+.section-title {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 10px;
+}
+
+
+.section-icon {
+
+    width: 52px;
+
+    height: 52px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background:
+        rgba(255,255,255,.08);
+
+    font-size: 25px;
+}
+
+
 .search-card h2 {
+
     font-size: 22px;
 
-    margin-bottom: 8px;
+    margin-bottom: 5px;
 }
+
 
 .search-card p {
+
     color: #9ca3af;
 
-    margin-bottom: 22px;
+    margin-bottom: 15px;
+
+    line-height: 1.5;
 }
 
 
+.endpoint {
+
+    display: inline-block;
+
+    background:
+        rgba(0,0,0,.25);
+
+    border:
+        1px solid
+        rgba(255,255,255,.08);
+
+    color: #93c5fd;
+
+    padding:
+        7px
+        11px;
+
+    border-radius: 7px;
+
+    font-family: monospace;
+
+    font-size: 13px;
+
+    margin-bottom: 20px;
+}
+
+
+/* ========================================= */
 /* FORM */
+/* ========================================= */
 
 .form-grid {
+
     display: grid;
 
     grid-template-columns:
-        repeat(auto-fit, minmax(220px, 1fr));
+        repeat(
+            auto-fit,
+            minmax(220px, 1fr)
+        );
 
     gap: 16px;
 
     margin-bottom: 20px;
 }
 
+
 .input-group {
+
     display: flex;
 
     flex-direction: column;
@@ -171,22 +304,29 @@ header p {
     gap: 8px;
 }
 
+
 .input-group label {
+
     color: #cbd5e1;
 
     font-size: 14px;
 }
 
+
 .input-group input {
+
     width: 100%;
 
     padding: 14px;
 
     border-radius: 10px;
 
-    border: 1px solid rgba(255,255,255,.12);
+    border:
+        1px solid
+        rgba(255,255,255,.12);
 
-    background: rgba(0,0,0,.25);
+    background:
+        rgba(0,0,0,.25);
 
     color: white;
 
@@ -195,19 +335,31 @@ header p {
     font-size: 15px;
 }
 
+
 .input-group input:focus {
-    border-color: #60a5fa;
+
+    border-color:
+        #60a5fa;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(96,165,250,.1);
 }
 
 
+/* ========================================= */
 /* BUTTON */
+/* ========================================= */
 
 .search-button {
+
     border: none;
 
     border-radius: 11px;
 
-    padding: 14px 22px;
+    padding:
+        14px
+        22px;
 
     background: #ffffff;
 
@@ -217,20 +369,37 @@ header p {
 
     cursor: pointer;
 
-    transition: .2s;
+    transition:
+        .2s;
 }
 
+
 .search-button:hover {
-    transform: translateY(-1px);
+
+    transform:
+        translateY(-1px);
 
     opacity: .9;
 }
 
 
-/* RESULT */
+.search-button:active {
+
+    transform:
+        translateY(0);
+}
+
+
+/* ========================================= */
+/* RESULT HEADER */
+/* ========================================= */
 
 .result-header {
-    margin: 30px 0 15px;
+
+    margin:
+        30px
+        0
+        15px;
 
     display: flex;
 
@@ -243,27 +412,39 @@ header p {
     flex-wrap: wrap;
 }
 
+
 .result-header h2 {
+
     font-size: 24px;
 }
 
+
 .location {
+
     color: #94a3b8;
 
     font-size: 14px;
+
+    margin-top: 5px;
 }
 
 
-/* WEATHER MAIN */
+/* ========================================= */
+/* MAIN WEATHER */
+/* ========================================= */
 
 .weather-main {
-    background: linear-gradient(
-        135deg,
-        rgba(96,165,250,.2),
-        rgba(255,255,255,.05)
-    );
 
-    border: 1px solid rgba(255,255,255,.1);
+    background:
+        linear-gradient(
+            135deg,
+            rgba(96,165,250,.2),
+            rgba(255,255,255,.05)
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,.1);
 
     border-radius: 20px;
 
@@ -280,53 +461,78 @@ header p {
     gap: 20px;
 }
 
+
 .temperature {
+
     font-size: 64px;
 
     font-weight: 700;
 }
 
+
 .condition {
+
     font-size: 22px;
 
     margin-top: 5px;
 }
 
+
 .description {
+
     color: #94a3b8;
 
     margin-top: 8px;
+
+    line-height: 1.5;
 }
 
+
 .weather-icon {
+
     font-size: 70px;
 }
 
 
-/* CARDS */
+/* ========================================= */
+/* INFO CARDS */
+/* ========================================= */
 
 .card-grid {
+
     display: grid;
 
     grid-template-columns:
-        repeat(auto-fit, minmax(190px, 1fr));
+        repeat(
+            auto-fit,
+            minmax(190px, 1fr)
+        );
 
     gap: 14px;
 
     margin-bottom: 20px;
 }
 
-.info-card {
-    background: rgba(255,255,255,.055);
 
-    border: 1px solid rgba(255,255,255,.08);
+.info-card {
+
+    background:
+        rgba(255,255,255,.055);
+
+    border:
+        1px solid
+        rgba(255,255,255,.08);
 
     border-radius: 16px;
 
     padding: 18px;
+
+    min-width: 0;
 }
 
+
 .info-title {
+
     color: #94a3b8;
 
     font-size: 13px;
@@ -334,7 +540,9 @@ header p {
     margin-bottom: 8px;
 }
 
+
 .info-value {
+
     font-size: 21px;
 
     font-weight: 600;
@@ -343,68 +551,171 @@ header p {
 }
 
 
-/* DATE CARDS */
+/* ========================================= */
+/* DAYS */
+/* ========================================= */
 
 .days-grid {
+
     display: grid;
 
     grid-template-columns:
-        repeat(auto-fit, minmax(280px, 1fr));
+        repeat(
+            auto-fit,
+            minmax(280px, 1fr)
+        );
 
     gap: 16px;
 }
 
-.day-card {
-    background: rgba(255,255,255,.055);
 
-    border: 1px solid rgba(255,255,255,.08);
+.day-card {
+
+    background:
+        rgba(255,255,255,.055);
+
+    border:
+        1px solid
+        rgba(255,255,255,.08);
 
     border-radius: 18px;
 
     padding: 22px;
+
+    transition:
+        .2s;
 }
 
+
+.day-card:hover {
+
+    transform:
+        translateY(-2px);
+
+    background:
+        rgba(255,255,255,.075);
+}
+
+
 .day-card h3 {
+
     margin-bottom: 15px;
 }
 
+
 .day-temp {
+
     font-size: 34px;
 
     font-weight: 700;
 
-    margin-bottom: 10px;
+    margin:
+        10px
+        0;
 }
 
+
 .day-condition {
+
     color: #cbd5e1;
 
     margin-bottom: 18px;
 }
 
 
-/* RAW JSON */
+.day-card .weather-icon {
+
+    font-size: 45px;
+}
+
+
+/* ========================================= */
+/* 30 GÜN İSTATİSTİK */
+/* ========================================= */
+
+.history-summary {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(200px, 1fr)
+        );
+
+    gap: 15px;
+
+    margin-bottom: 25px;
+}
+
+
+.summary-card {
+
+    background:
+        rgba(255,255,255,.055);
+
+    border:
+        1px solid
+        rgba(255,255,255,.08);
+
+    border-radius: 16px;
+
+    padding: 20px;
+}
+
+
+.summary-title {
+
+    color: #94a3b8;
+
+    font-size: 13px;
+
+    margin-bottom: 8px;
+}
+
+
+.summary-value {
+
+    font-size: 28px;
+
+    font-weight: 700;
+}
+
+
+/* ========================================= */
+/* JSON */
+/* ========================================= */
 
 .json-section {
+
     margin-top: 25px;
 }
 
+
 .json-section summary {
+
     cursor: pointer;
 
-    background: rgba(255,255,255,.07);
+    background:
+        rgba(255,255,255,.07);
 
     padding: 15px;
 
     border-radius: 10px;
+
+    color: #cbd5e1;
 }
 
+
 pre {
+
     margin-top: 10px;
 
     background: #05070d;
 
-    border: 1px solid rgba(255,255,255,.08);
+    border:
+        1px solid
+        rgba(255,255,255,.08);
 
     padding: 20px;
 
@@ -420,12 +731,18 @@ pre {
 }
 
 
+/* ========================================= */
 /* ERROR */
+/* ========================================= */
 
 .error {
-    background: rgba(239,68,68,.12);
 
-    border: 1px solid rgba(239,68,68,.3);
+    background:
+        rgba(239,68,68,.12);
+
+    border:
+        1px solid
+        rgba(239,68,68,.3);
 
     color: #fca5a5;
 
@@ -437,44 +754,78 @@ pre {
 }
 
 
+/* ========================================= */
 /* LOADING */
+/* ========================================= */
 
 .loading {
+
     text-align: center;
 
     padding: 40px;
 
     color: #94a3b8;
+
+    font-size: 16px;
 }
 
 
+/* ========================================= */
 /* MOBILE */
+/* ========================================= */
 
 @media(max-width: 700px) {
 
     header {
+
         flex-direction: column;
 
         align-items: flex-start;
-
-        gap: 15px;
     }
 
+
     .logo {
+
         font-size: 26px;
     }
 
+
     .weather-main {
+
         flex-direction: column;
 
         align-items: flex-start;
     }
 
+
     .temperature {
+
         font-size: 50px;
     }
 
+
     .weather-icon {
+
         font-size: 55px;
     }
+
+
+    .tabs {
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+
+    .tab {
+
+        width: 100%;
+
+        padding:
+            12px
+            10px;
+    }
+
 }

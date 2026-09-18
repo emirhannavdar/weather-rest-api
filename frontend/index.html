@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Weather REST API</title>
 
@@ -13,55 +18,117 @@
 
 <div class="container">
 
+    <!-- ========================================= -->
     <!-- HEADER -->
+    <!-- ========================================= -->
+
     <header>
+
         <div>
-            <div class="logo">☁️ Weather API</div>
-            <p>Visual Crossing REST API</p>
+
+            <div class="logo">
+                ☁️ Weather API
+            </div>
+
+            <p>
+                Visual Crossing REST API
+            </p>
+
         </div>
 
-        <div id="apiStatus" class="status">
+        <div
+            id="apiStatus"
+            class="status"
+        >
             ● API kontrol ediliyor...
         </div>
+
     </header>
 
 
-    <!-- API SEÇİMİ -->
+    <!-- ========================================= -->
+    <!-- TABS -->
+    <!-- ========================================= -->
+
     <div class="tabs">
 
-        <button class="tab active" data-tab="general">
+        <button
+            class="tab active"
+            data-tab="general"
+        >
             🌤️ Genel Hava
         </button>
 
-        <button class="tab" data-tab="day">
+        <button
+            class="tab"
+            data-tab="day"
+        >
             📅 Tek Gün
         </button>
 
-        <button class="tab" data-tab="range">
+        <button
+            class="tab"
+            data-tab="range"
+        >
             📆 Tarih Aralığı
+        </button>
+
+        <button
+            class="tab"
+            data-tab="last30"
+        >
+            📊 Son 30 Gün
         </button>
 
     </div>
 
 
-    <!-- ========================= -->
-    <!-- GENEL HAVA DURUMU -->
-    <!-- ========================= -->
+    <!-- ========================================= -->
+    <!-- GENEL HAVA -->
+    <!-- /weather -->
+    <!-- ========================================= -->
 
-    <section id="general" class="tab-content active">
+    <section
+        id="general"
+        class="tab-content active"
+    >
 
         <div class="search-card">
 
-            <h2>🌤️ Genel Hava Durumu</h2>
+            <div class="section-title">
 
-            <p>
-                Belirtilen koordinatın hava durumu bilgilerini getirir.
-            </p>
+                <div class="section-icon">
+                    🌤️
+                </div>
+
+                <div>
+
+                    <h2>
+                        Genel Hava Durumu
+                    </h2>
+
+                    <p>
+                        Belirtilen koordinat için hava durumu
+                        bilgilerini getirir.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="endpoint">
+                GET /weather
+            </div>
+
 
             <div class="form-grid">
 
                 <div class="input-group">
-                    <label>Enlem</label>
+
+                    <label for="generalLat">
+                        Enlem
+                    </label>
 
                     <input
                         type="number"
@@ -70,10 +137,15 @@
                         step="any"
                         placeholder="Örn: 39.9207"
                     >
+
                 </div>
 
+
                 <div class="input-group">
-                    <label>Boylam</label>
+
+                    <label for="generalLon">
+                        Boylam
+                    </label>
 
                     <input
                         type="number"
@@ -82,9 +154,11 @@
                         step="any"
                         placeholder="Örn: 32.8541"
                     >
+
                 </div>
 
             </div>
+
 
             <button
                 class="search-button"
@@ -95,29 +169,58 @@
 
         </div>
 
+
         <div id="generalResult"></div>
 
     </section>
 
 
-    <!-- ========================= -->
+    <!-- ========================================= -->
     <!-- TEK GÜN -->
-    <!-- ========================= -->
+    <!-- /weather/day -->
+    <!-- ========================================= -->
 
-    <section id="day" class="tab-content">
+    <section
+        id="day"
+        class="tab-content"
+    >
 
         <div class="search-card">
 
-            <h2>📅 Belirli Gün</h2>
+            <div class="section-title">
 
-            <p>
-                Seçilen koordinat ve tarih için hava durumunu getirir.
-            </p>
+                <div class="section-icon">
+                    📅
+                </div>
+
+                <div>
+
+                    <h2>
+                        Belirli Gün
+                    </h2>
+
+                    <p>
+                        Seçilen tarih için hava durumu bilgilerini
+                        getirir.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="endpoint">
+                GET /weather/day
+            </div>
+
 
             <div class="form-grid">
 
                 <div class="input-group">
-                    <label>Enlem</label>
+
+                    <label for="dayLat">
+                        Enlem
+                    </label>
 
                     <input
                         type="number"
@@ -125,10 +228,15 @@
                         value="39.9207"
                         step="any"
                     >
+
                 </div>
 
+
                 <div class="input-group">
-                    <label>Boylam</label>
+
+                    <label for="dayLon">
+                        Boylam
+                    </label>
 
                     <input
                         type="number"
@@ -136,19 +244,26 @@
                         value="32.8541"
                         step="any"
                     >
+
                 </div>
 
+
                 <div class="input-group">
-                    <label>Tarih</label>
+
+                    <label for="dayDate">
+                        Tarih
+                    </label>
 
                     <input
                         type="date"
                         id="dayDate"
                         value="2026-09-20"
                     >
+
                 </div>
 
             </div>
+
 
             <button
                 class="search-button"
@@ -159,29 +274,58 @@
 
         </div>
 
+
         <div id="dayResult"></div>
 
     </section>
 
 
-    <!-- ========================= -->
+    <!-- ========================================= -->
     <!-- TARİH ARALIĞI -->
-    <!-- ========================= -->
+    <!-- /weather/day/aralik -->
+    <!-- ========================================= -->
 
-    <section id="range" class="tab-content">
+    <section
+        id="range"
+        class="tab-content"
+    >
 
         <div class="search-card">
 
-            <h2>📆 Tarih Aralığı</h2>
+            <div class="section-title">
 
-            <p>
-                İki tarih arasındaki tüm günlerin hava durumunu getirir.
-            </p>
+                <div class="section-icon">
+                    📆
+                </div>
+
+                <div>
+
+                    <h2>
+                        Tarih Aralığı
+                    </h2>
+
+                    <p>
+                        İki tarih arasındaki hava durumu
+                        bilgilerini getirir.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="endpoint">
+                GET /weather/day/aralik
+            </div>
+
 
             <div class="form-grid">
 
                 <div class="input-group">
-                    <label>Enlem</label>
+
+                    <label for="rangeLat">
+                        Enlem
+                    </label>
 
                     <input
                         type="number"
@@ -189,10 +333,15 @@
                         value="39.9207"
                         step="any"
                     >
+
                 </div>
 
+
                 <div class="input-group">
-                    <label>Boylam</label>
+
+                    <label for="rangeLon">
+                        Boylam
+                    </label>
 
                     <input
                         type="number"
@@ -200,29 +349,41 @@
                         value="32.8541"
                         step="any"
                     >
+
                 </div>
 
+
                 <div class="input-group">
-                    <label>Başlangıç Tarihi</label>
+
+                    <label for="rangeStart">
+                        Başlangıç Tarihi
+                    </label>
 
                     <input
                         type="date"
                         id="rangeStart"
                         value="2026-09-01"
                     >
+
                 </div>
 
+
                 <div class="input-group">
-                    <label>Bitiş Tarihi</label>
+
+                    <label for="rangeEnd">
+                        Bitiş Tarihi
+                    </label>
 
                     <input
                         type="date"
                         id="rangeEnd"
                         value="2026-09-20"
                     >
+
                 </div>
 
             </div>
+
 
             <button
                 class="search-button"
@@ -233,14 +394,106 @@
 
         </div>
 
+
         <div id="rangeResult"></div>
 
     </section>
 
 
+    <!-- ========================================= -->
+    <!-- SON 30 GÜN -->
+    <!-- /weather/day/Son30Gun -->
+    <!-- ========================================= -->
+
+    <section
+        id="last30"
+        class="tab-content"
+    >
+
+        <div class="search-card">
+
+            <div class="section-title">
+
+                <div class="section-icon">
+                    📊
+                </div>
+
+                <div>
+
+                    <h2>
+                        Son 30 Gün
+                    </h2>
+
+                    <p>
+                        Belirtilen koordinat için son 30 günlük
+                        hava durumu verilerini getirir.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="endpoint">
+                GET /weather/day/Son30Gun
+            </div>
+
+
+            <div class="form-grid">
+
+                <div class="input-group">
+
+                    <label for="last30Lat">
+                        Enlem
+                    </label>
+
+                    <input
+                        type="number"
+                        id="last30Lat"
+                        value="39.9207"
+                        step="any"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="last30Lon">
+                        Boylam
+                    </label>
+
+                    <input
+                        type="number"
+                        id="last30Lon"
+                        value="32.8541"
+                        step="any"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="search-button"
+                onclick="getLast30Days()"
+            >
+                🔍 Son 30 Günü Getir
+            </button>
+
+        </div>
+
+
+        <div id="last30Result"></div>
+
+    </section>
+
 </div>
+
 
 <script src="script.js"></script>
 
 </body>
+
 </html>
