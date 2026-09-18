@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Weather REST API</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- HEADER -->
+    <header>
+        <div>
+            <div class="logo">☁️ Weather API</div>
+            <p>Visual Crossing REST API</p>
+        </div>
+
+        <div id="apiStatus" class="status">
+            ● API kontrol ediliyor...
+        </div>
+    </header>
+
+
+    <!-- API SEÇİMİ -->
+    <div class="tabs">
+
+        <button class="tab active" data-tab="general">
+            🌤️ Genel Hava
+        </button>
+
+        <button class="tab" data-tab="day">
+            📅 Tek Gün
+        </button>
+
+        <button class="tab" data-tab="range">
+            📆 Tarih Aralığı
+        </button>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- GENEL HAVA DURUMU -->
+    <!-- ========================= -->
+
+    <section id="general" class="tab-content active">
+
+        <div class="search-card">
+
+            <h2>🌤️ Genel Hava Durumu</h2>
+
+            <p>
+                Belirtilen koordinatın hava durumu bilgilerini getirir.
+            </p>
+
+            <div class="form-grid">
+
+                <div class="input-group">
+                    <label>Enlem</label>
+
+                    <input
+                        type="number"
+                        id="generalLat"
+                        value="39.9207"
+                        step="any"
+                        placeholder="Örn: 39.9207"
+                    >
+                </div>
+
+                <div class="input-group">
+                    <label>Boylam</label>
+
+                    <input
+                        type="number"
+                        id="generalLon"
+                        value="32.8541"
+                        step="any"
+                        placeholder="Örn: 32.8541"
+                    >
+                </div>
+
+            </div>
+
+            <button
+                class="search-button"
+                onclick="getGeneralWeather()"
+            >
+                🔍 Hava Durumunu Getir
+            </button>
+
+        </div>
+
+        <div id="generalResult"></div>
+
+    </section>
+
+
+    <!-- ========================= -->
+    <!-- TEK GÜN -->
+    <!-- ========================= -->
+
+    <section id="day" class="tab-content">
+
+        <div class="search-card">
+
+            <h2>📅 Belirli Gün</h2>
+
+            <p>
+                Seçilen koordinat ve tarih için hava durumunu getirir.
+            </p>
+
+            <div class="form-grid">
+
+                <div class="input-group">
+                    <label>Enlem</label>
+
+                    <input
+                        type="number"
+                        id="dayLat"
+                        value="39.9207"
+                        step="any"
+                    >
+                </div>
+
+                <div class="input-group">
+                    <label>Boylam</label>
+
+                    <input
+                        type="number"
+                        id="dayLon"
+                        value="32.8541"
+                        step="any"
+                    >
+                </div>
+
+                <div class="input-group">
+                    <label>Tarih</label>
+
+                    <input
+                        type="date"
+                        id="dayDate"
+                        value="2026-09-20"
+                    >
+                </div>
+
+            </div>
+
+            <button
+                class="search-button"
+                onclick="getDayWeather()"
+            >
+                🔍 Günlük Hava Durumunu Getir
+            </button>
+
+        </div>
+
+        <div id="dayResult"></div>
+
+    </section>
+
+
+    <!-- ========================= -->
+    <!-- TARİH ARALIĞI -->
+    <!-- ========================= -->
+
+    <section id="range" class="tab-content">
+
+        <div class="search-card">
+
+            <h2>📆 Tarih Aralığı</h2>
+
+            <p>
+                İki tarih arasındaki tüm günlerin hava durumunu getirir.
+            </p>
+
+            <div class="form-grid">
+
+                <div class="input-group">
+                    <label>Enlem</label>
+
+                    <input
+                        type="number"
+                        id="rangeLat"
+                        value="39.9207"
+                        step="any"
+                    >
+                </div>
+
+                <div class="input-group">
+                    <label>Boylam</label>
+
+                    <input
+                        type="number"
+                        id="rangeLon"
+                        value="32.8541"
+                        step="any"
+                    >
+                </div>
+
+                <div class="input-group">
+                    <label>Başlangıç Tarihi</label>
+
+                    <input
+                        type="date"
+                        id="rangeStart"
+                        value="2026-09-01"
+                    >
+                </div>
+
+                <div class="input-group">
+                    <label>Bitiş Tarihi</label>
+
+                    <input
+                        type="date"
+                        id="rangeEnd"
+                        value="2026-09-20"
+                    >
+                </div>
+
+            </div>
+
+            <button
+                class="search-button"
+                onclick="getRangeWeather()"
+            >
+                🔍 Tarih Aralığını Getir
+            </button>
+
+        </div>
+
+        <div id="rangeResult"></div>
+
+    </section>
+
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
