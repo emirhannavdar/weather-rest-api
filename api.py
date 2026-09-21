@@ -5,6 +5,10 @@ from weather import get_havadurumu
 from weather import get_weather_day
 from weather import get_iki_gun_arasi
 from weather import getSon30Gun
+from weather import getSpesificTime
+from weather import getDegreeDay
+
+
 
 app = FastAPI(
     title="Weather REST API",
@@ -33,10 +37,6 @@ def weather(
     enlem: float = 39.9207,
     boylam: float = 32.8541
 ):
-    """
-    Belirtilen koordinat için hava durumu bilgilerini getirir.
-    """
-
     try:
         data = get_havadurumu(enlem, boylam)
 
@@ -112,5 +112,49 @@ def otuzgun(
     except Exception as e:
         raise HTTPException(
             status_code=411,
+            detail=str(e)
+        )
+
+@app.get("/weather/day/saat/aralik")
+def spesificTime(
+    enlem: float = 39.9207,
+    boylam: float = 32.8541,
+    saat: str = "13:00:00",
+    tarih: str = "2026-05-13"
+):
+    try:
+        data = getSpesificTime(enlem,boylam,saat,tarih)
+
+        return {
+            "success": True,
+            "enlem": enlem,
+            "boylam": boylam,
+            "saat": saat,
+            "tarih": tarih,
+            "data": data
+        }
+    except Exception as e:
+        raise HTTPException(
+            status_code=411,
+            detail=str(e)
+        )
+
+@app.get("/weather/day/max/min")
+def DegreeDay(
+    enlem: float = 39.9207,
+    boylam: float = 32.8541
+):
+    try:
+        data = getDegreeDay(enlem,boylam)
+
+        return {
+            "success": True,
+            "enlem": enlem,
+            "boylam": boylam,
+            "data": data
+        }
+    except Exception as e:
+        raise HTTPException(
+            status_code=402,
             detail=str(e)
         )

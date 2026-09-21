@@ -75,7 +75,7 @@ def getSon30Gun(enlem: float,boylam: float):
         "key" : API_KEY,
         "contentType" : "json",
         "unitGroup": "metric",
-        "include": "days",
+        "include": "current",
         "lang": "tr",
     }
     response = requests.get(
@@ -86,3 +86,49 @@ def getSon30Gun(enlem: float,boylam: float):
 
     response.raise_for_status()
     return response.json()
+
+def getSpesificTime(enlem: float, boylam: float, saat: str, tarih: str):
+    url = (
+        BASE_URI + f"{enlem},{boylam}/{tarih}T{saat}"
+    )
+
+    data = {
+        "key" : API_KEY,
+        "contentType" : "json",
+        "unitGroup": "metric",
+        "include": "current",
+        "lang": "tr",
+    }
+    response = requests.get(
+        url,
+        params = data,
+    )
+    
+    response.raise_for_status()
+    return response.json()
+
+def getDegreeDay(enlem: float, boylam: float):
+    url = (
+        BASE_URI + f"{enlem},{boylam}/last30days"
+    )
+
+    data = {
+        "key" : API_KEY,
+        "contentType" : "json",
+        "unitGroup": "metric",
+        "include": "days",
+        "lang": "tr",
+        "elements": "datetime,tempmax,tempmin,degreedays,accdegreedays",
+        "degreeDayTempMaxThreshold": 25,
+        "degreeDayTempBase" : 10,
+    }
+
+    response = requests.get(
+        url,
+        params = data,
+    )
+    
+    response.raise_for_status()
+    return response.json()
+
+
