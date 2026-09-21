@@ -9,7 +9,6 @@ from weather import getSpesificTime
 from weather import getDegreeDay
 
 
-
 app = FastAPI(
     title="Weather REST API",
     description="Visual Crossing hava durumu REST API",
