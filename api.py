@@ -6,7 +6,7 @@ from weather import get_weather_day
 from weather import get_iki_gun_arasi
 from weather import getSon30Gun
 from weather import getSpesificTime
-from weather import getDegreeDay
+from weather import getDegreeDay, getSon30GunDays
 
 
 app = FastAPI(
