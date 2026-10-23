@@ -94,6 +94,26 @@ def gun_aralik(
             detail=str(e)
         )
 
+@app.get('/weather/day/days')
+def gunluk_hava_durumu_30gun(
+    enlem: float = 39.9207,
+    boylam: float = 32.8541
+):
+    try:
+        data = getSon30GunDays(enlem,boylam)
+
+        return {
+            "success": True,
+            "enlem": enlem,
+            "boylam": boylam,
+            "data": data
+        }
+    except Exception as e:
+        raise HTTPException(
+            status_code=411,
+            detail=str(e)
+        )
+
 @app.get("/weather/day/Son30Gun")
 def otuzgun(
     enlem: float = 39.9207,
